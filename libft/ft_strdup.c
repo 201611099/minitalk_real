@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 17:52:25 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/05/11 16:18:43 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:09:44 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	s = (char *)s1;
-	if (!(ret = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1)))
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!ret)
 		return (0);
 	i = -1;
 	while (s[++i] != '\0')

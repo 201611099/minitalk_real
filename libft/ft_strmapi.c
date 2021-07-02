@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:54:03 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/05/13 11:04:25 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:11:36 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	idx = 0;
 	if (!s || !f)
 		return (0);
-	if (!(ret = (char *)malloc(ft_strlen(s) + 1)))
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!ret)
 		return (0);
 	while (s[idx])
 	{

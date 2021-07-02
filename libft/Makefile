@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2021/05/12 21:03:37 by hyojlee          ###   ########.fr        #
+#    Updated: 2021/06/30 16:04:17 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,19 +24,22 @@ else
 	OBJS_FILES = $(OBJS)
 endif
 
+%.o:%.c
+	@$(CC) $(CFLAGS) -c $^ -o $@
+
 all: $(NAME)
 
 $(NAME) : $(OBJS_FILES)
-	ar rcs $(NAME) $(OBJS_FILES)
+	@ar rcs $(NAME) $(OBJS_FILES)
 
 bonus:
-	make WITH_BONUS=1 all
+	@make WITH_BONUS=1 all
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

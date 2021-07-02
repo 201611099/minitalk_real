@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 21:57:03 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/05/12 19:08:13 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:17:45 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_strlench(char const *s, char c)
 
 static void	ft_free(char **s, int i)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (idx < i)
@@ -50,17 +50,22 @@ static void	ft_free(char **s, int i)
 	free(s);
 }
 
-static char	*ft_malloc(char **ret, int *idx, int len)
+static int	ft_malloc(char **ret, int *idx, int len, char const *s)
 {
-	if (!(ret[*idx] = (char *)malloc(len + 1)))
+	ret[*idx] = (char *)malloc(len + 1);
+	if (!ret[idx[0]])
 	{
-		ft_free(ret, *idx);
+		ft_free(ret, idx[0]);
 		return (0);
 	}
-	return (ret[*idx]);
+	idx[1] = 0;
+	while (idx[1] < len)
+		ret[idx[0]][idx[1]++] = s[idx[2]++];
+	ret[idx[0]++][idx[1]] = '\0';
+	return (1);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**ret;
 	int		idx[3];
@@ -70,20 +75,19 @@ char		**ft_split(char const *s, char c)
 	idx[2] = 0;
 	if (!s)
 		return (0);
-	if (!(ret = (char **)malloc(sizeof(char *) * num_of_arg(s, c))))
+	ret = (char **)malloc(sizeof(char *) * num_of_arg(s, c));
+	if (!ret)
 		return (0);
 	while (idx[0] < num_of_arg(s, c) && s[idx[2]] != '\0')
 	{
-		if (!(len = ft_strlench(&s[idx[2]], c)))
+		len = ft_strlench(&s[idx[2]], c);
+		if (!len)
 		{
 			idx[2]++;
 			continue ;
 		}
-		ft_malloc(ret, &idx[0], len);
-		idx[1] = 0;
-		while (idx[1] < len)
-			ret[idx[0]][idx[1]++] = s[idx[2]++];
-		ret[idx[0]++][idx[1]] = '\0';
+		if (!ft_malloc(ret, idx, len, s))
+			return (0);
 	}
 	ret[num_of_arg(s, c) - 1] = 0;
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 13:02:21 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/05/13 11:58:25 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:32:19 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 static int	ft_isblank(char c)
 {
-	if (c == ' ' || c == '\n' || c == '\r'
-			|| c == '\v' || c == '\f' || c == '\t')
+	if (c == ' ' || c == '\n' || c == '\r' || c == '\v' || c == '\f' || c == '\t')
 		return (1);
 	return (0);
 }
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	char		*s;
 	long long	ret;

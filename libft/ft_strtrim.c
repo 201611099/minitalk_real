@@ -6,13 +6,13 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 15:33:23 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/02 19:47:12 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/02 22:15:07 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isin(char c, char const *set)
+int	ft_isin(char c, char const *set)
 {
 	while (*set)
 		if (*set++ == c)
@@ -20,7 +20,7 @@ int		ft_isin(char c, char const *set)
 	return (0);
 }
 
-int		ft_idx1(char const *s1, char const *set)
+int	ft_idx1(char const *s1, char const *set)
 {
 	int	idx;
 
@@ -34,7 +34,7 @@ int		ft_idx1(char const *s1, char const *set)
 	return (idx);
 }
 
-int		ft_idx2(char const *s1, char const *set)
+int	ft_idx2(char const *s1, char const *set)
 {
 	int	idx;
 
@@ -66,7 +66,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	msize = idx[1] - idx[0] + 2;
 	if (s1[0] == '\0')
 		msize = 1;
-	if (!(ret = (char *)malloc(msize)))
+	ret = (char *)malloc(sizeof(char) * msize);
+	if (!ret)
 		return (0);
 	ret[0] = '\0';
 	while (idx[0] <= idx[1])

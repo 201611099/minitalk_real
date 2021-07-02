@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 14:11:40 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/05/13 11:04:51 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/01 13:36:19 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ static void	ft_fillitoa(char *s, int n, int idx, int lidx)
 	}
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*ret;
 	int		lidx;
 
-	if (!(ret = (char *)malloc(ft_digit(n) + 1)))
+	ret = (char *)malloc(ft_digit(n) + 1);
+	if (!ret)
 		return (0);
 	lidx = ft_digit(n);
 	ret[lidx] = '\0';

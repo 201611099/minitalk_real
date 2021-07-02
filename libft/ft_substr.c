@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 12:54:19 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/05/09 16:30:13 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/01 14:14:57 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (0);
 	if (ft_strlen(s) < len)
 		len = ft_strlen(s);
-	if (!(ret = (char *)malloc(sizeof(char) * (len + 1))))
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
 		return (0);
 	ret[0] = '\0';
 	if (ft_strlen(s) < start)

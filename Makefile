@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2021/07/02 22:01:05 by lhj-unix         ###   ########.fr        #
+#    Updated: 2021/07/02 22:35:22 by lhj-unix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,12 @@ $(NAME):
 clean:
 	$(MAKE) clean -C $(S_DIR)
 	$(MAKE) clean -C $(C_DIR)
+	rm -f $(NAME)
 
 fclean: clean
 	$(MAKE) fclean -C $(S_DIR)
 	$(MAKE) fclean -C $(C_DIR)
-	rm -f $(NAME) $(S_NAME) $(C_NAME)
+	rm -f $(S_NAME) $(C_NAME)
 
 re: fclean all
 

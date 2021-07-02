@@ -6,11 +6,11 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:11 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/06/28 20:54:19 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/02 22:19:04 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "../includes/minitalk.h"
 
 void	ft_send(unsigned char ch, int pid)
 {

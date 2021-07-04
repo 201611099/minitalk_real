@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 17:23:33 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/04 17:26:10 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	repeat_receive(t_len *len)
 			set_char(0, 1, 0);
 		}
 	}
-	ft_putnbr_fd(len->msg_len, 1);
 	str = (char *)malloc(sizeof(char) * (len->msg_len + 1));
 	if (!str)
 		exit(1);

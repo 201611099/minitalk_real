@@ -6,12 +6,13 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2021/07/02 22:35:22 by lhj-unix         ###   ########.fr        #
+#    Updated: 2021/07/04 22:37:07 by lhj-unix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = .minitalk
 MAKE = make
+MAKE_BONUS = make bonus
 S_DIR = ./mini_server/
 S_NAME = server
 C_DIR = ./mini_client/
@@ -20,11 +21,19 @@ C_NAME = client
 all: $(NAME)
 
 $(NAME):
+ifdef WITH_BONUS
+	$(MAKE_BONUS) -C $(S_DIR)
+	$(MAKE_BONUS) -C $(C_DIR)
+else
 	$(MAKE) -C $(S_DIR)
-	cp $(S_DIR)$(S_NAME) $(S_NAME)
 	$(MAKE) -C $(C_DIR)
+endif
+	cp $(S_DIR)$(S_NAME) $(S_NAME)
 	cp $(C_DIR)$(C_NAME) $(C_NAME)
 	touch $(NAME)
+
+bonus:
+	$(MAKE)	WITH_BONUS=1 all
 
 clean:
 	$(MAKE) clean -C $(S_DIR)

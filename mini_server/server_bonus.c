@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 21:17:36 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/04 23:08:28 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ void		handler(int signo)
 		set_char(0, 0);
 }
 
-static void	repeat_receive(t_len *len)
+static int	receive_integer(t_len *len)
 {
-	int idx;
-	char *str;
-
+	int	idx;
+	
 	idx = 0;
 	while (idx < 32)
 	{
@@ -48,12 +47,22 @@ static void	repeat_receive(t_len *len)
 		if (++idx % 8 == 0)
 			len->len[((32 - idx) / 8)] = set_char(0, 1);
 	}
-	str = (char *)malloc(sizeof(char) * (len->msg_len + 1));
+	return (len->msg_len);
+}
+
+static void	receive_info(void)
+{
+	t_len	len;
+	int	idx;
+	char	*str;
+
+	idx = 0;
+	receive_integer(&len);
+	str = (char *)malloc(sizeof(char) * (len.msg_len + 1));
 	if (!str)
 		exit(1);
-	idx = 0;
-	str[len->msg_len] = '\0';
-	while (idx < (len->msg_len * 8))
+	str[len.msg_len] = '\0';
+	while (idx < (len.msg_len * 8))
 	{
 		pause();
 		if (++idx % 8 == 0)
@@ -65,10 +74,8 @@ static void	repeat_receive(t_len *len)
 
 int		main(void)
 {
-	t_len	len;
-	struct sigaction act;
+	t_len	c_pid;
 
-	act.sa_flags = SA_SIGINFO;
 	ft_putstr_fd("Server pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
@@ -77,8 +84,11 @@ int		main(void)
 		exit(1);
 	while (1)
 	{
-		repeat_receive(&len);
+		receive_integer(&c_pid);
+		receive_info();
 		ft_putchar_fd('\n', 1);
+		usleep(1000);
+		kill(c_pid.msg_len, SIGUSR1);
 	}
 	return (0);
 }

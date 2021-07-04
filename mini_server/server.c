@@ -6,20 +6,23 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 17:26:10 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/04 17:35:54 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-unsigned char	set_char(unsigned char bit, int init, int get)
+unsigned char	set_char(unsigned char bit, int get)
 {
-	static unsigned char ch = 0;
+	static unsigned char	ch = 0;
+	unsigned char		tmp;
 	
+	tmp = ch;
 	if (get)
-		return (ch);
-	if (init)
+	{
 		ch = 0;
+		return (tmp);
+	}
 	ch = ch << 1;
 	ch += bit;
 	return (ch);
@@ -43,10 +46,7 @@ static void	repeat_receive(t_len *len)
 	{
 		pause();
 		if (++idx % 8 == 0)
-		{
-			len->len[((32 - idx) / 8)] = set_char(1, 0, 1);
-			set_char(0, 1, 0);
-		}
+			len->len[((32 - idx) / 8)] = set_char(0, 1);
 	}
 	str = (char *)malloc(sizeof(char) * (len->msg_len + 1));
 	if (!str)
@@ -57,10 +57,7 @@ static void	repeat_receive(t_len *len)
 	{
 		pause();
 		if (++idx % 8 == 0)
-		{
-			str[(idx / 8) - 1] = set_char(1, 0, 1);
-			set_char(0, 1, 0);
-		}
+			str[(idx / 8) - 1] = set_char(0, 1);
 	}
 	ft_putstr_fd(str, 1);
 	free(str);

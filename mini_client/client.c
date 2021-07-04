@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:11 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 17:16:40 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/04 22:02:24 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ void	ft_subsend(unsigned char ch, int pid)
 void	ft_send(t_len *len, int pid, char *arg)
 {
 	int	i;
-	char	*s;
 
 	i = 4;
-	s = arg;
-	if (!s)
-		return ;
 	while (i-- > 0)
 		ft_subsend((unsigned char)(len->len[i]), pid);
 	usleep(30);

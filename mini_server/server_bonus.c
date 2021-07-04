@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 15:10:19 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/04 17:49:08 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-unsigned int	set_char(unsigned int bit, int init, int get)
+unsigned char	set_char(unsigned char bit, int get)
 {
-	static unsigned int	ch = 0;
-
+	static unsigned char	ch = 0;
+	unsigned char		tmp;
+	
+	tmp = ch;
 	if (get)
-		return (ch);
-	if (init)
+	{
 		ch = 0;
+		return (tmp);
+	}
 	ch = ch << 1;
 	ch += bit;
 	return (ch);
 }
 
-void			handler(int signo)
+void		handler(int signo)
 {
 	if (signo == SIGUSR1)
 		set_char(1, 0, 0);
@@ -33,31 +36,49 @@ void			handler(int signo)
 		set_char(0, 0, 0);
 }
 
-int				main(void)
+static void	repeat_receive(t_len *len)
 {
-	int				num;
-	t_len	len;
+	int idx;
+	char *str;
 
-	num = 0;
+	idx = 0;
+	while (idx < 32)
+	{
+		pause();
+		if (++idx % 8 == 0)
+			len->len[((32 - idx) / 8)] = set_char(0, 1);
+	}
+	str = (char *)malloc(sizeof(char) * (len->msg_len + 1));
+	if (!str)
+		exit(1);
+	idx = 0;
+	str[len->msg_len] = '\0';
+	while (idx < (len->msg_len * 8))
+	{
+		pause();
+		if (++idx % 8 == 0)
+			str[(idx / 8) - 1] = set_char(0, 1);
+	}
+	ft_putstr_fd(str, 1);
+	free(str);
+}
+
+int		main(void)
+{
+	t_len	len;
+	struct sigaction act;
+
+	act.sa_flags = SA_SIGINFO;
 	ft_putstr_fd("Server pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-	if (signal(SIGUSR1, handler) == SIG_ERR)
-		exit(1);
-	if (signal(SIGUSR2, handler) == SIG_ERR)
+	if (signal(SIGUSR1, handler) == SIG_ERR
+			|| signal(SIGUSR2, handler) == SIG_ERR)
 		exit(1);
 	while (1)
 	{
-		pause();
-		num++;
-		if (num == 32)
-		{
-			len.msg_len = set_char(1, 0, 1);
-			ft_putstr_fd(len.len, 1);
-			set_char(0, 1, 0);
-			num = 0;
-		}
+		repeat_receive(&len);
+		ft_putchar_fd('\n', 1);
 	}
 	return (0);
 }
-

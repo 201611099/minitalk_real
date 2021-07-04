@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 17:35:54 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:17:17 by lhj-unix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ unsigned char	set_char(unsigned char bit, int get)
 void		handler(int signo)
 {
 	if (signo == SIGUSR1)
-		set_char(1, 0, 0);
+		set_char(1, 0);
 	else if (signo == SIGUSR2)
-		set_char(0, 0, 0);
+		set_char(0, 0);
 }
 
 static void	repeat_receive(t_len *len)

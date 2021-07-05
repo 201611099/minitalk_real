@@ -40,7 +40,7 @@ static void	handler(int signo, siginfo_t *siginfo, void *context)
 	g_pid = siginfo->si_pid;
 }
 
-static int	receive_integer(t_len *len)
+static void	receive_integer(t_len *len)
 {
 	int	idx;
 
@@ -50,8 +50,7 @@ static int	receive_integer(t_len *len)
 		pause();
 		if (++idx % 8 == 0)
 			len->len[((32 - idx) / 8)] = set_char(0, 1);
-	}
-	return (len->msg_len);
+	}	
 }
 
 static void	receive_info(void)

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/05 19:57:52 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/05 20:11:18 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	receive_integer(t_len *len)
 	return (len->msg_len);
 }
 
-static void	receive_info(t_len *c_pid)
+static void	receive_info(void)
 {
 	t_len	len;
 	int		idx;
@@ -65,7 +65,7 @@ static void	receive_info(t_len *c_pid)
 	str = (char *)malloc(sizeof(char) * (len.msg_len + 1));
 	if (!str)
 	{
-		kill(c_pid->msg_len, SIGUSR2);
+		kill(g_pid, SIGUSR2);
 		exit(1);
 	}
 	str[len.msg_len] = '\0';
@@ -82,7 +82,6 @@ static void	receive_info(t_len *c_pid)
 int	main(void)
 {
 	t_sigaction	act;
-	t_len		c_pid;
 
 	ft_putstr_fd("Server pid: ", 1);
 	ft_putnbr_fd(getpid(), 1);
@@ -92,13 +91,12 @@ int	main(void)
 	if (sigaction(SIGUSR1, &act, NULL) == -1
 		|| sigaction(SIGUSR2, &act, NULL) == -1)
 	{
-		kill(c_pid.msg_len, SIGUSR2);
+		kill(g_pid, SIGUSR2);
 		exit(1);
 	}
 	while (1)
 	{
-		receive_integer(&c_pid);
-		receive_info(&c_pid);
+		receive_info();
 		ft_putchar_fd('\n', 1);
 		usleep(1000);
 		kill(g_pid, SIGUSR1);

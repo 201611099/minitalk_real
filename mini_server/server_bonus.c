@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/05 10:59:35 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/05 11:34:13 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ unsigned char	set_char(unsigned char bit, int get)
 	return (ch);
 }
 
-void	handler(int signo)
+static void	handler(int signo)
 {
 	if (signo == SIGUSR1)
 		set_char(1, 0);
@@ -50,7 +50,7 @@ static int	receive_integer(t_len *len)
 	return (len->msg_len);
 }
 
-static void	receive_info(void)
+static void	receive_info(t_len *c_pid)
 {
 	t_len	len;
 	int		idx;
@@ -60,7 +60,10 @@ static void	receive_info(void)
 	receive_integer(&len);
 	str = (char *)malloc(sizeof(char) * (len.msg_len + 1));
 	if (!str)
+	{
+		kill(c_pid->msg_len, SIGUSR2);
 		exit(1);
+	}
 	str[len.msg_len] = '\0';
 	while (idx < (len.msg_len * 8))
 	{
@@ -81,11 +84,14 @@ int	main(void)
 	ft_putchar_fd('\n', 1);
 	if (signal(SIGUSR1, handler) == SIG_ERR
 		|| signal(SIGUSR2, handler) == SIG_ERR)
+	{
+		kill(c_pid.msg_len, SIGUSR2);
 		exit(1);
+	}
 	while (1)
 	{
 		receive_integer(&c_pid);
-		receive_info();
+		receive_info(&c_pid);
 		ft_putchar_fd('\n', 1);
 		usleep(1000);
 		kill(c_pid.msg_len, SIGUSR1);

@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:11 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/05 10:56:22 by hyojlee          ###   ########.fr       */
+/*   Updated: 2021/07/05 11:37:30 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,22 @@ static void	ft_send(t_len *len, int pid, char *arg)
 
 	i = 4;
 	c_pid.msg_len = getpid();
-	while (i-- > 0)
-		ft_subsend((unsigned char)(c_pid.len[i]), pid);
+	while (i > 0)
+		ft_subsend((unsigned char)(c_pid.len[--i]), pid);
 	i = 4;
-	while (i-- > 0)
-		ft_subsend((unsigned char)(len->len[i]), pid);
+	while (i > 0)
+		ft_subsend((unsigned char)(len->len[--i]), pid);
 	usleep(30);
-	i = 0;
 	while (i < len->msg_len)
 		ft_subsend(arg[i++], pid);
 }
 
-void	handler(int signo)
+static void	handler(int signo)
 {
 	if (signo == SIGUSR1)
-		ft_putstr_fd("Received signal from server. Sent successfully.\n", 1);
+		ft_putstr_fd("Sent successfully.\n", 1);
+	else if (signo == SIGUSR2)
+		ft_putstr_fd("Failed to send message.\n", 1);
 }
 
 int	main(int argc, char **argv)

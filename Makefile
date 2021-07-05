@@ -6,7 +6,7 @@
 #    By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/03 10:49:43 by hyojlee           #+#    #+#              #
-#    Updated: 2021/07/04 22:37:07 by lhj-unix         ###   ########.fr        #
+#    Updated: 2021/07/05 11:40:43 by hyojlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ else
 endif
 	cp $(S_DIR)$(S_NAME) $(S_NAME)
 	cp $(C_DIR)$(C_NAME) $(C_NAME)
-	touch $(NAME)
+	@touch $(NAME)
 
 bonus:
 	$(MAKE)	WITH_BONUS=1 all
@@ -47,4 +47,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

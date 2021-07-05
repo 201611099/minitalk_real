@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../includes/minitalk_bonus.h"
 
 static void	ft_subsend(unsigned char ch, int pid)
 {

@@ -16,10 +16,10 @@
 # include "../libft/libft.h"
 # include <signal.h>
 
-typedef union	u_len
+typedef union u_len
 {
 	char	len[4];
-	int	msg_len;
+	int		msg_len;
 }		t_len;
 
 #endif

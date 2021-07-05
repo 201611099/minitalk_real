@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 	{
 		ft_putstr_fd("Usage: ./client server_pid message\n", 1);
-		exit(1);
+		return (0);
 	}
 	pid = ft_atoi(argv[1]);
 	len.msg_len = ft_strlen(argv[2]);

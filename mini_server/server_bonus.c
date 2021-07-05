@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:04 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 23:08:28 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/05 10:59:35 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 unsigned char	set_char(unsigned char bit, int get)
 {
 	static unsigned char	ch = 0;
-	unsigned char		tmp;
-	
+	unsigned char			tmp;
+
 	tmp = ch;
 	if (get)
 	{
@@ -28,7 +28,7 @@ unsigned char	set_char(unsigned char bit, int get)
 	return (ch);
 }
 
-void		handler(int signo)
+void	handler(int signo)
 {
 	if (signo == SIGUSR1)
 		set_char(1, 0);
@@ -39,7 +39,7 @@ void		handler(int signo)
 static int	receive_integer(t_len *len)
 {
 	int	idx;
-	
+
 	idx = 0;
 	while (idx < 32)
 	{
@@ -53,7 +53,7 @@ static int	receive_integer(t_len *len)
 static void	receive_info(void)
 {
 	t_len	len;
-	int	idx;
+	int		idx;
 	char	*str;
 
 	idx = 0;
@@ -72,7 +72,7 @@ static void	receive_info(void)
 	free(str);
 }
 
-int		main(void)
+int	main(void)
 {
 	t_len	c_pid;
 
@@ -80,7 +80,7 @@ int		main(void)
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
 	if (signal(SIGUSR1, handler) == SIG_ERR
-			|| signal(SIGUSR2, handler) == SIG_ERR)
+		|| signal(SIGUSR2, handler) == SIG_ERR)
 		exit(1);
 	while (1)
 	{

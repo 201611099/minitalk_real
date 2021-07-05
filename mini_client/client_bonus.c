@@ -6,7 +6,7 @@
 /*   By: hyojlee <hyojlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 20:32:11 by hyojlee           #+#    #+#             */
-/*   Updated: 2021/07/04 22:50:05 by lhj-unix         ###   ########.fr       */
+/*   Updated: 2021/07/05 10:56:22 by hyojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_subsend(unsigned char ch, int pid)
 {
 	unsigned char	now;
 	unsigned char	before;
-	int		idx;
+	int				idx;
 
 	before = ch;
 	idx = 0;
@@ -35,7 +35,7 @@ static void	ft_subsend(unsigned char ch, int pid)
 
 static void	ft_send(t_len *len, int pid, char *arg)
 {
-	int	i;
+	int		i;
 	t_len	c_pid;
 
 	i = 4;
@@ -57,10 +57,10 @@ void	handler(int signo)
 		ft_putstr_fd("Received signal from server. Sent successfully.\n", 1);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int	pid;
-	t_len len;
+	int		pid;
+	t_len	len;
 
 	if (argc != 3)
 	{

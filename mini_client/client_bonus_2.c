@@ -68,6 +68,6 @@ int	main(int argc, char **argv)
 	pid = ft_atoi(argv[1]);
 	len.msg_len = ft_strlen(argv[2]);
 	ft_send(&len, pid, argv[2]);
-	pause();
+	//pause();
 	return (0);
 }

@@ -97,7 +97,7 @@ int	main(void)
 	{
 		receive_info();
 		ft_putchar_fd('\n', 1);
-		usleep(1000);
+		//usleep(1000);
 		kill(g_pid, SIGUSR1);
 	}
 	return (0);

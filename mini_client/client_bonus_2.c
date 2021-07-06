@@ -63,7 +63,8 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Usage: ./client server_pid message\n", 1);
 		return (0);
 	}
-	if (signal(SIGUSR1, handler) == SIG_ERR)
+	if (signal(SIGUSR1, handler) == SIG_ERR
+	    || signal(SIGUSR2, handler) == SIG_ERR)
 		exit(1);
 	pid = ft_atoi(argv[1]);
 	len.msg_len = ft_strlen(argv[2]);

@@ -4,7 +4,6 @@
 > ### mandatory part
 > > 두 프로그램 사이에서 통신은 반드시 UNIX **signal만**을 이용해야함 **(SIGUSR1, SIGUSR2만 사용 가능)**
 > > #### server
-> > ------------
 > > <pre>
 > > <code>
 > > * 실행 시 pid를 출력해야함

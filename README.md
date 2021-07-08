@@ -1,5 +1,4 @@
 # Minitalk
 
 > ## mandatory part
-
-* 
+>> ### server

@@ -1,9 +1,5 @@
-# minitalk_real
+# Minitalk
 
-Minitalk
-========
-
-mandatory part
---------------
+## mandatory part
 
 * 

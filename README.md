@@ -1,5 +1,5 @@
 # Minitalk
 
-## mandatory part
+> ## mandatory part
 
 * 

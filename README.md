@@ -14,3 +14,9 @@
 > > * 허용 함수: write, signal, sigemptyset, sigaddset, sigaction, kill, getpid, malloc, free, pause, sleep, usleep, exit
 > > </code>
 > > </pre>
+> > #### client
+> > <pre>
+> > <code>
+> > * ./client server_PID message
+> > </code>
+> > </pre>

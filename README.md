@@ -1,6 +1,7 @@
 # Minitalk
 정리 노션: https://www.notion.so/minitalk-e5203e8c2622434f8176d983ad656f0c
 ## subject
+> 실행파일 이름은 client와 server
 > ### mandatory part
 > > 두 프로그램 사이에서 통신은 반드시 UNIX **signal만**을 이용해야함 **(SIGUSR1, SIGUSR2만 사용 가능)**
 > > #### server

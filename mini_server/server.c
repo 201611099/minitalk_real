@@ -59,7 +59,8 @@ static void	repeat_receive(t_len *len)
 		if (++idx % 8 == 0)
 			str[(idx / 8) - 1] = set_char(0, 1);
 	}
-	ft_putstr_fd(str, 1);
+//	ft_putstr_fd(str, 1);
+	ft_putendl_fd(str, 1); //개행 붙여서 출력해주는 함수
 	free(str);
 }
 
@@ -76,7 +77,7 @@ int	main(void)
 	while (1)
 	{
 		repeat_receive(&len);
-		ft_putchar_fd('\n', 1);
+//		ft_putchar_fd('\n', 1); //ft_putstr_fd()대신 ft_putendl_fd()써서 불필요
 	}
 	return (0);
 }

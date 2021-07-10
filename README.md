@@ -20,3 +20,6 @@
 > > * ./client server_PID message
 > > </code>
 > > </pre>
+> ### bonus part
+> > * 작은 수신 시스템(reception acknowledgement 추가하기
+> > * 유니코드 문자열 지원 (https://namu.wiki/w/UTF-8)

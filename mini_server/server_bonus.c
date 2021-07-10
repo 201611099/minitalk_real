@@ -74,7 +74,8 @@ static void	receive_info(void)
 		if (++idx % 8 == 0)
 			str[(idx / 8) - 1] = set_char(0, 1);
 	}
-	ft_putstr_fd(str, 1);
+//	ft_putstr_fd(str, 1);
+	ft_putendl_fd(str, 1);
 	free(str);
 }
 
@@ -96,7 +97,7 @@ int	main(void)
 	while (1)
 	{
 		receive_info();
-		ft_putchar_fd('\n', 1);
+//		ft_putchar_fd('\n', 1);
 		//usleep(1000);
 		kill(g_pid, SIGUSR1);
 	}

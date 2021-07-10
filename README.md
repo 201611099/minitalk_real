@@ -20,10 +20,10 @@
 > > * ./client server_PID message
 > > </code>
 > > </pre>
-> 실행 방법
+> > #### 실행 방법
 > > make [all] -> ./server -> ./client server_pid msg
 > ### bonus part
 > > * 작은 수신 시스템(reception acknowledgement 추가하기
 > > * 유니코드 문자열 지원 (https://namu.wiki/w/UTF-8)
-> 실행방법
+> > #### 실행방법
 > > make bonus -> ./server -> ./client server_pid msg
